@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriPulse AI | Plateforme AgriTech Intégrée</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Local styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Professional Splash Screen -->
+    <div id="splash-screen">
+        <div class="splash-content">
+            <i class="ph-fill ph-leaf splash-logo"></i>
+            <h1 class="splash-title">AgriPulse <span>AI</span></h1>
+            <div class="splash-loader"></div>
+            <p>Chargement des systèmes AgriTech...</p>
+        </div>
+    </div>
+
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar glass">
+            <div class="logo">
+                <i class="ph-fill ph-leaf logo-icon"></i>
+                <span>AgriPulse <strong>AI</strong></span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-section="dashboard">
+                    <i class="ph-duotone ph-squares-four"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-section="livestock">
+                    <i class="ph-duotone ph-bird"></i>
+                    <span>Élevage</span>
+                </a>
+                <a href="#" class="nav-item" data-section="agriculture">
+                    <i class="ph-duotone ph-plant"></i>
+                    <span>Agriculture</span>
+                </a>
+                <a href="#" class="nav-item" data-section="ai-insights">
+                    <i class="ph-duotone ph-sparkle"></i>
+                    <span>Analyse IA</span>
+                </a>
+                <a href="#" class="nav-item" data-section="settings">
+                    <i class="ph-duotone ph-gear"></i>
+                    <span>Paramètres</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-profile glass-card">
+                    <div class="avatar">MD</div>
+                    <div class="user-info">
+                        <span class="name">Moussa Drame</span>
+                        <span class="role">Admin AgriTech</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-nav">
+                <div class="search-bar glass">
+                    <i class="ph ph-magnifying-glass"></i>
+                    <input type="text" placeholder="Rechercher des données...">
+                </div>
+                <div class="header-actions">
+                    <button id="btn-demo" class="btn-demo glass">
+                        <i class="ph-fill ph-play"></i> Démarrer Demo
+                    </button>
+                    <div class="status-badge glass">
+                        <span class="pulse-dot"></span> Système Live
+                    </div>
+                    <button class="btn-icon glass"><i class="ph ph-bell"></i></button>
+                </div>
+            </header>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="content-section active">
+                <h1 class="welcome-text">Vue d'ensemble <span class="text-gradient">AgriTech</span></h1>
+                
+                <!-- KPI Summary Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card glass-card">
+                        <div class="stat-icon egg-bg"><i class="ph-duotone ph-egg"></i></div>
+                        <div class="stat-data">
+                            <span class="label">Production Œufs</span>
+                            <h2 id="kpi-eggs">0</h2>
+                            <span class="trend up"><i class="ph ph-trend-up"></i> +4.2%</span>
+                        </div>
+                    </div>
+                    <div class="stat-card glass-card">
+                        <div class="stat-icon chick-bg"><i class="ph-duotone ph-baby"></i></div>
+                        <div class="stat-data">
+                            <span class="label">Nouveaux Poussins</span>
+                            <h2 id="kpi-chicks">0</h2>
+                            <span class="trend up"><i class="ph ph-trend-up"></i> +2.1%</span>
+                        </div>
+                    </div>
+                    <div class="stat-card glass-card">
+                        <div class="stat-icon plant-bg"><i class="ph-duotone ph-plant"></i></div>
+                        <div class="stat-data">
+                            <span class="label">Récoltes (kg)</span>
+                            <h2 id="kpi-harvests">0</h2>
+                            <span class="trend up"><i class="ph ph-trend-up"></i> +12%</span>
+                        </div>
+                    </div>
+                    <div class="stat-card glass-card">
+                        <div class="stat-icon revenue-bg"><i class="ph-duotone ph-currency-circle-dollar"></i></div>
+                        <div class="stat-data">
+                            <span class="label">Revenu Total Est.</span>
+                            <h2 id="kpi-revenue">0 CFA</h2>
+                            <span class="trend up"><i class="ph ph-trend-up"></i> +8%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-grid">
+                    <!-- Global Chart -->
+                    <div class="chart-container glass-card grid-span-2">
+                        <div class="card-header">
+                            <h3>Performance Élevage vs Agriculture</h3>
+                        </div>
+                        <div class="main-chart">
+                            <canvas id="mainPerformanceChart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Prediction Panel -->
+                    <div class="ai-panel glass-card">
+                        <div class="card-header">
+                            <h3>Prédictions IA</h3>
+                            <i class="ph-fill ph-sparkle ai-icon"></i>
+                        </div>
+                        <div class="ai-content">
+                            <div class="prediction-item">
+                                <span>Demain (Œufs) :</span>
+                                <h3 id="predict-eggs">--</h3>
+                            </div>
+                            <div class="prediction-item">
+                                <span>Prochaine Récolte (Est.) :</span>
+                                <h3 id="predict-harvest">-- kg</h3>
+                            </div>
+                            <div class="ai-insights-list">
+                                <div class="insight-item">
+                                    <div class="insight-icon info"><i class="ph ph-lightbulb"></i></div>
+                                    <p>Augmentez l'irrigation de 10% pour la parcelle B.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Infrastructure Gallery -->
+                <div class="gallery-container" style="margin-top: 3rem;">
+                    <h3 class="section-title">Infrastructures Connectées</h3>
+                    <div class="glass-gallery">
+                        <div class="gallery-card glass">
+                            <img src="asset/WhatsApp Image 2026-04-19 at 14.14.44 (2).jpeg" alt="Convoyeur œufs">
+                            <div class="overlay">
+                                <span>Unité de Collecte #08</span>
+                            </div>
+                        </div>
+                        <div class="gallery-card glass">
+                            <img src="asset/WhatsApp Image 2026-04-19 at 14.14.44 (1).jpeg" alt="Contrôleur IA">
+                            <div class="overlay">
+                                <span>Contrôleur d'Environnement AI</span>
+                            </div>
+                        </div>
+                        <div class="gallery-card glass">
+                            <img src="asset/WhatsApp Image 2026-04-19 at 14.14.45 (2).jpeg" alt="Serre intelligente">
+                            <div class="overlay">
+                                <span>Serre de Précision #03</span>
+                            </div>
+                        </div>
+                        <div class="gallery-card glass">
+                            <img src="asset/WhatsApp Image 2026-04-19 at 14.14.45 (1).jpeg" alt="Aéroponie">
+                            <div class="overlay">
+                                <span>Culture Aéroponique Bio</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Livestock Section -->
+            <section id="livestock" class="content-section">
+                <h1 class="welcome-text">Gestion de l'<span class="text-gradient">Élevage</span></h1>
+                <div class="form-grid">
+                    <div class="glass-card form-container">
+                        <h3>Enregistrer Production</h3>
+                        <form id="egg-form" class="agri-form">
+                            <div class="input-group">
+                                <label>Nombre d'œufs</label>
+                                <input type="number" id="egg-count" required placeholder="Ex: 500">
+                            </div>
+                            <button type="submit" class="btn-primary-glow">Ajouter Œufs</button>
+                        </form>
+                    </div>
+                    <div class="glass-card form-container">
+                        <h3>Nouveaux Poussins</h3>
+                        <form id="chick-form" class="agri-form">
+                            <div class="input-group">
+                                <label>Nombre de poussins</label>
+                                <input type="number" id="chick-count" required placeholder="Ex: 50">
+                            </div>
+                            <button type="submit" class="btn-primary-glow">Ajouter Poussins</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="data-history glass-card">
+                    <h3>Historique Production</h3>
+                    <div class="table-scroll">
+                        <table id="livestock-history">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th>Quantité</th>
+                                    <th>Valeur Est.</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Agriculture Section -->
+            <section id="agriculture" class="content-section">
+                <h1 class="welcome-text">Gestion de l'<span class="text-gradient">Agriculture</span></h1>
+                <div class="form-grid">
+                    <div class="glass-card form-container">
+                        <h3>Nouvelle Culture</h3>
+                        <form id="crop-form" class="agri-form">
+                            <div class="input-group">
+                                <label>Nom de la culture</label>
+                                <input type="text" id="crop-name" required placeholder="Ex: Maïs">
+                            </div>
+                            <div class="input-group">
+                                <label>Surface (Hectares)</label>
+                                <input type="number" step="0.1" id="crop-surface" required placeholder="Ex: 2.5">
+                            </div>
+                            <button type="submit" class="btn-primary-glow">Créer Culture</button>
+                        </form>
+                    </div>
+                    <div class="glass-card form-container">
+                        <h3>Enregistrer Récolte</h3>
+                        <form id="harvest-form" class="agri-form">
+                            <div class="input-group">
+                                <label>Culture</label>
+                                <select id="harvest-crop-select" required></select>
+                            </div>
+                            <div class="input-group">
+                                <label>Poids Récolté (kg)</label>
+                                <input type="number" id="harvest-weight" required placeholder="Ex: 1200">
+                            </div>
+                            <button type="submit" class="btn-primary-glow">Ajouter Récolte</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="data-history glass-card">
+                    <h3>Historique des Récoltes</h3>
+                    <div class="table-scroll">
+                        <table id="agriculture-history">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Culture</th>
+                                    <th>Poids (kg)</th>
+                                    <th>Rendement</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Insights Section -->
+            <section id="ai-insights" class="content-section">
+                <h1 class="welcome-text">Analyses <span class="text-gradient">Prédictives</span></h1>
+                <div class="ai-dashboard-grid">
+                    <div class="glass-card ai-report">
+                        <h3>Rapport de Performance IA</h3>
+                        <div id="ai-dynamic-content">
+                            <p>Analyse des données en cours...</p>
+                        </div>
+                    </div>
+                    <div class="glass-card">
+                        <h3>Graphique des Tendance Future</h3>
+                        <canvas id="predictionTrendChart"></canvas>
+                    </div>
+                </div>
+            <!-- Settings Section -->
+            <section id="settings" class="content-section">
+                <h1 class="welcome-text">Configuration du <span class="text-gradient">Système</span></h1>
+                <div class="glass-card form-container">
+                    <h3>Prix du Marché (CFA)</h3>
+                    <form id="settings-form" class="agri-form">
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label>Prix d'un œuf</label>
+                                <input type="number" id="price-egg" required>
+                            </div>
+                            <div class="input-group">
+                                <label>Prix d'un poussin</label>
+                                <input type="number" id="price-chick" required>
+                            </div>
+                            <div class="input-group">
+                                <label>Prix Récolte (par kg)</label>
+                                <input type="number" id="price-harvest" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-primary-glow" style="max-width: 200px;">Sauvegarder Tarifs</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- AI Floating Assistant -->
+    <div id="ai-chat-bubble" class="glass">
+        <i class="ph-fill ph-sparkle"></i>
+    </div>
+    <div id="ai-chat-window" class="glass">
+        <div class="chat-header">
+            <span>Assistant AgriPulse AI</span>
+            <button id="close-chat"><i class="ph ph-x"></i></button>
+        </div>
+        <div id="chat-messages">
+            <div class="message bot">Bonjour ! Comment puis-je optimiser votre ferme aujourd'hui ?</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="chat-input-text" placeholder="Posez une question...">
+            <button id="send-chat"><i class="ph-fill ph-paper-plane-right"></i></button>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast-container"></div>
+
+    <!-- Script connection -->
+    <script src="script.js"></script>
+</body>
+</html>
